@@ -34,8 +34,8 @@ const list3 = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f4f4f6',
-    padding: 16,
+    backgroundColor: '#DEDEDE',
+    padding: 5,
   },
   title: {
     fontSize: 32,
@@ -46,22 +46,22 @@ const styles = StyleSheet.create({
 const Accordion = ({content, setSection}) => {
   console.log('acordion', content);
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       {content && (
-        <View>
+        <ScrollView style={{flex: 1}}>
           {content.sections
             .sort((a, b) => a.order - b.order)
             .map((item, index) => (
-              <List section={item} />
+              <List key={index} section={item} setSection={setSection} />
 
               // <List list={list2} />
               // <List list={list3} />
               // <List {...{list}} />
               // <List {...{list}} />
             ))}
-        </View>
+        </ScrollView>
       )}
-    </ScrollView>
+    </View>
   );
 };
 

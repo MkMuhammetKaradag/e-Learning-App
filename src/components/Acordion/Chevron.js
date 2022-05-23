@@ -4,7 +4,7 @@ import Svg, {Path} from 'react-native-svg';
 import Animated, {useAnimatedStyle} from 'react-native-reanimated';
 import {mix, mixColor} from 'react-native-redash';
 
-const size = 30;
+const size = 28;
 const styles = StyleSheet.create({
   container: {
     height: size,
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
 const Chevron = ({progress}) => {
   const style = useAnimatedStyle(() => ({
-    backgroundColor: mixColor(progress.value, '#525251', '#e45645'),
+    backgroundColor: mixColor(progress.value, '#525251', 'black'),
     transform: [{rotateZ: `${mix(progress.value, 0, Math.PI)}rad`}],
   }));
   return (

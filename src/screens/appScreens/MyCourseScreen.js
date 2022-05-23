@@ -44,7 +44,7 @@ const MyCourseScreen = ({navigation}) => {
   }
   const handleProductSelect = id => {
     console.log('girdimi', id);
-    navigation.navigate('CourseDetailScreen', {id});
+    navigation.navigate('WatchCourseScreen', {id});
   };
   const renderCourse = ({item}) => (
     <View style={{paddingBottom: 20}}>

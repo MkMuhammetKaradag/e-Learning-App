@@ -16,15 +16,8 @@ import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import Accordion from '../../../../components/Acordion/Accordin';
 import useFetch from '../../../../hooks/useFetch/useFetch';
 import DetailHeader from '../../../../components/DetailHeader/DetailHeader';
-// const SecondRoute = () => (
-//   <View style={{flex: 1}}>
-//     <Accordion></Accordion>
-//   </View>
-// );
-// const renderScene = SceneMap({
-//   first: FirstRoute,
-//   second: SecondRoute,
-// });
+//import Video from 'react-native-video';
+import VideoPlayer from 'react-native-video-player';
 
 const renderTabBar = props => (
   <TabBar
@@ -43,7 +36,7 @@ const WatchCourseScreen = ({route, navigation}) => {
     `${myApi}/courses/get-course/${id}`,
   );
   const [content, setContent] = React.useState();
-  const [section, setSection] = React.useState();
+  const [section, setSection] = React.useState(null);
   // const {loading, data, error, fetchData} = useFetch();
   const layout = useWindowDimensions();
   const [index, setIndex] = useState(0);
@@ -65,11 +58,9 @@ const WatchCourseScreen = ({route, navigation}) => {
         return <View style={{flex: 1, backgroundColor: 'red'}} />;
       case 2:
         return (
-          <View style={{flex: 1}}>
-            <Accordion
-              content={data.course.content}
-              setSection={setSection}></Accordion>
-          </View>
+          <Accordion
+            content={data.course.content}
+            setSection={setSection}></Accordion>
         );
     }
   };
@@ -81,7 +72,7 @@ const WatchCourseScreen = ({route, navigation}) => {
   // }, [data]);
   console.log('section', section);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* <Card>
         {/* <Card.Title
           title="Card Title"
@@ -102,7 +93,23 @@ const WatchCourseScreen = ({route, navigation}) => {
           <Text>Ok</Text>
         </View>
       </Card> */}
-      <DetailHeader course={data.course} navigation={navigation}></DetailHeader>
+      {/* <DetailHeader course={data.course} navigation={navigation}></DetailHeader> */}
+      {section && (
+        <VideoPlayer
+          video={{
+            uri:
+              section.type === 'VIDEO'
+                ? section.video_url
+                : section.type === 'QUIZ'
+                ? 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'
+                : '',
+          }}
+          videoWidth={1600}
+          videoHeight={900}
+          thumbnail={{uri: data.course.thumbnail}}
+        />
+      )}
+
       {/* <Image
         style={styles.image}
         source={{
@@ -140,7 +147,7 @@ const WatchCourseScreen = ({route, navigation}) => {
         onPress={() => console.log('Pressed')}>
         Paper test İçin Eklendi
       </Button> */}
-    </View>
+    </SafeAreaView>
   );
 };
 

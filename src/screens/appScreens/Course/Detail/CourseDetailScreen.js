@@ -5,6 +5,7 @@ import {
   useWindowDimensions,
   SafeAreaView,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import useFetchOnly from '../../../../hooks/useFetch/useFetchOnly';
@@ -29,12 +30,12 @@ import DetailHeader from '../../../../components/DetailHeader/DetailHeader';
 const renderTabBar = props => (
   <TabBar
     {...props}
-    indicatorStyle={{backgroundColor: 'gray'}}
+    indicatorStyle={{backgroundColor: '#DEDEDE'}}
     tabStyle={styles.tabStyle}
     style={styles.tab}
     labelStyle={styles.tabLabel}
     contentContainerStyle={styles.tabContainer}
-    scrollEnabled={false}></TabBar>
+    scrollEnabled={true}></TabBar>
 );
 
 const CourseDetailScreen = ({route, navigation}) => {
@@ -45,12 +46,9 @@ const CourseDetailScreen = ({route, navigation}) => {
   const [content, setContent] = React.useState();
   const [section, setSection] = React.useState();
   // const {loading, data, error, fetchData} = useFetch();
-  const layout = useWindowDimensions();
+  const layout = Dimensions.get('window').width;
   const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    {key: 1, title: 'First'},
-    {key: 2, title: 'Second'},
-  ]);
+  const [routes] = useState([{key: 1, title: 'Content'}]);
 
   if (error) {
     return <Error></Error>;
@@ -62,14 +60,10 @@ const CourseDetailScreen = ({route, navigation}) => {
   const renderScene = ({route}) => {
     switch (route.key) {
       case 1:
-        return <View style={{flex: 1, backgroundColor: 'red'}} />;
-      case 2:
         return (
-          <View style={{flex: 1}}>
-            <Accordion
-              content={data.course.content}
-              setSection={setSection}></Accordion>
-          </View>
+          <Accordion
+            content={data.course.content}
+            setSection={setSection}></Accordion>
         );
     }
   };
@@ -82,7 +76,9 @@ const CourseDetailScreen = ({route, navigation}) => {
   console.log('section', section);
   return (
     <View style={styles.container}>
-      {/* <Card>
+      <ScrollView style={{flex: 1}}>
+        <View>
+          {/* <Card>
         {/* <Card.Title
           title="Card Title"
           subtitle="Card Subtitle"
@@ -102,44 +98,32 @@ const CourseDetailScreen = ({route, navigation}) => {
           <Text>Ok</Text>
         </View>
       </Card> */}
-      <DetailHeader course={data.course} navigation={navigation}></DetailHeader>
-      {/* <Image
+          <DetailHeader
+            course={data.course}
+            navigation={navigation}></DetailHeader>
+          {/* <Image
         style={styles.image}
         source={{
           uri: data.course.thumbnail,
         }}></Image> */}
-      <View style={styles.body_container}>
-        <Text style={styles.title}>{data.course.title}</Text>
-        <Text numberOfLines={2} style={styles.description}>
-          {data.course.description}
-        </Text>
-        <Text style={styles.price}>{data.price}</Text>
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingLeft: 20,
-          paddingRight: 20,
-        }}>
-        <Text>Cancel</Text>
-        <Text>Ok</Text>
-      </View>
-
+          <View style={styles.body_container}>
+            <Text style={styles.title}>{data.course.title}</Text>
+            <Text numberOfLines={2} style={styles.description}>
+              {data.course.description}
+            </Text>
+            <Text style={styles.price}>{data.price}</Text>
+          </View>
+        </View>
+      </ScrollView>
       <TabView
         navigationState={{index, routes}}
         renderScene={renderScene}
         onIndexChange={setIndex}
         renderTabBar={renderTabBar}
-        initialLayout={{width: layout.width}}
+        initialLayout={layout}
+        sceneContainerStyle={{flex: 1}}
+        // tabBarPosition="top"
       />
-
-      {/* <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => console.log('Pressed')}>
-        Paper test İçin Eklendi
-      </Button> */}
     </View>
   );
 };

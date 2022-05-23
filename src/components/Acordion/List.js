@@ -16,9 +16,9 @@ import Item, {ListItem} from './ListItem';
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 16,
+    marginTop: 4,
     backgroundColor: 'white',
-    padding: 16,
+    padding: 15,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     flexDirection: 'row',
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   items: {
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const List = ({section}) => {
+const List = ({section, setSection}) => {
   const aref = useAnimatedRef(<View></View>);
   const open = useSharedValue(false);
   const progress = useDerivedValue(() =>
@@ -80,6 +80,7 @@ const List = ({section}) => {
                 key={key}
                 isLast={key === section.section_contents.length - 1}
                 sectionContent={item}
+                setSection={setSection}
               />
             ))}
         </View>

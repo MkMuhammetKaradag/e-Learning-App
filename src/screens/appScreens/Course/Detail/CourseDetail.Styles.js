@@ -12,7 +12,12 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     backgroundColor: 'white',
   },
-  body_container: {},
+  body_container: {
+    flex: 1,
+    marginBottom: 5,
+    marginHorizontal: 10,
+    justifyContent: 'space-between',
+  },
   title: {fontWeight: 'bold'},
   description: {fontStyle: 'italic'},
   price: {
@@ -22,7 +27,8 @@ const styles = StyleSheet.create({
   },
   tab: {
     paddingTop: 0,
-    backgroundColor: 'gray',
+    backgroundColor: '#DEDEDE',
+    justifyContent: 'space-between',
   },
 
   tabContainer: {
@@ -31,8 +37,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  tabLabel: {fontWeight: 'bold', color: 'purple'},
+  tabLabel: {fontWeight: 'bold', color: 'black'},
 
-  tabStyle: {width: SCREEN_WIDTH / 2, maxHeight: 45},
+  tabStyle: {width: SCREEN_WIDTH / 1, maxHeight: 45},
 });
 export default styles;
