@@ -9,8 +9,10 @@ export default () => {
       <NativeBaseProvider>
         <View style={styles.container}>
           <StatusBar
+            translucent
             barStyle="light-content"
-            backgroundColor={'red'}></StatusBar>
+            backgroundColor={'black'}
+          />
           <Router></Router>
         </View>
       </NativeBaseProvider>

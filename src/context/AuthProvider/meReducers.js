@@ -7,6 +7,7 @@ export const meSlice = createSlice({
     wishlist: [],
     courses: [],
     selectCourse: null,
+    isPurchas: false,
   },
   reducers: {
     setCourses: (state, action) => {
@@ -39,13 +40,18 @@ export const meSlice = createSlice({
         state.wishlist.push(itemWishlist);
       }
     },
+    isPurchas: (state, action) => {
+      const {id} = action.payload;
+      let index = state.courses.findIndex(s => s._id == id);
+      state.isPurchas = !(index < 0);
+    },
     cleanCourse: state => {
       state.courses = [];
     },
   },
 });
 
-export const {setCourses, cleanCourse, setWishlist, addWishlist} =
+export const {setCourses, cleanCourse, setWishlist, addWishlist, isPurchas} =
   meSlice.actions;
 
 export default meSlice.reducer;

@@ -1,22 +1,23 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-const HomeHeader = ({title, navigation}) => {
+
+const Header = ({title, navigation}) => {
   return (
     <View style={styles.header}>
       <View
         style={{
-          marginLeft: 20,
+          marginLeft: 15,
           alignItems: 'center',
           justifyContent: 'center',
         }}>
         <MCIcon
           type="material-community"
-          name="menu"
+          name="keyboard-backspace"
           color={'#fff'}
-          size={32}
+          size={30}
           onPress={() => {
-            navigation.toggleDrawer();
+            navigation.goBack();
           }}></MCIcon>
       </View>
 
@@ -36,6 +37,8 @@ const HomeHeader = ({title, navigation}) => {
   );
 };
 
+export default Header;
+
 const styles = StyleSheet.create({
   header: {
     backgroundColor: 'black',
@@ -50,5 +53,3 @@ const styles = StyleSheet.create({
     marginLeft: 30,
   },
 });
-
-export default HomeHeader;

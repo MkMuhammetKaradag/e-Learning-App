@@ -19,11 +19,13 @@ const RootClientTabs = () => {
     <ClientTabs.Navigator
       initialRouteName="HomeScreen"
       screenOptions={{
-        tabBarActiveTintColor: 'black',
+        tabBarActiveTintColor: 'white',
+        tabBarStyle: {backgroundColor: 'black'},
       }}>
       <ClientTabs.Screen
         name="HomeScreen"
         options={{
+          title: 'Home',
           // title: 'E-learning',
           // headerStyle: {backgroundColor: '#64b5f6'},
           // headerTitleStyle: {color: 'white'},
@@ -32,25 +34,41 @@ const RootClientTabs = () => {
           tabBarIcon: ({focused, size}) => (
             <EIcon
               name="folder-video"
-              color={focused ? '#7cc' : 'black'}
+              color={focused ? 'white' : 'gray'}
               size={size}
             />
           ),
         }}
         component={HomeScreen}></ClientTabs.Screen>
       <ClientTabs.Screen
+        name="SearchScreen"
+        options={{
+          title: 'Search',
+          headerShown: false,
+          tabBarIcon: ({focused, size}) => (
+            <MAIcon
+              name="search"
+              color={focused ? 'white' : 'gray'}
+              size={size}
+            />
+          ),
+        }}
+        component={MyWishlistScreen}></ClientTabs.Screen>
+      <ClientTabs.Screen
         name="MyCourseScreen"
         options={{
+          title: 'MyCourse',
           headerShown: false,
           tabBarIcon: ({focused, size}) => (
             <FAIcon
               name="home"
-              color={focused ? '#7cc' : 'black'}
+              color={focused ? 'white' : 'gray'}
               size={size}
             />
           ),
         }}
         component={MyCourseScreen}></ClientTabs.Screen>
+
       <ClientTabs.Screen
         name="MyWishlistScreen"
         options={{
@@ -59,7 +77,7 @@ const RootClientTabs = () => {
           tabBarIcon: ({focused, size}) => (
             <MAIcon
               name="favorite"
-              color={focused ? '#7cc' : 'black'}
+              color={focused ? 'white' : 'gray'}
               size={size}
             />
           ),
