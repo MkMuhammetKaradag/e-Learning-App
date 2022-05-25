@@ -17,7 +17,7 @@ import Item, {ListItem} from './ListItem';
 const styles = StyleSheet.create({
   container: {
     marginTop: 4,
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     padding: 15,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#fff',
   },
   items: {
     overflow: 'hidden',

@@ -1,16 +1,17 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions, StatusBar} from 'react-native';
 const deviceSize = Dimensions.get('window');
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 28,
+    paddingTop: StatusBar.currentHeight,
+    backgroundColor: 'black',
   },
   image: {
     width: deviceSize.width,
     height: deviceSize.height / 3,
     resizeMode: 'contain',
-    backgroundColor: 'white',
+    backgroundColor: 'black',
   },
   body_container: {},
   title: {fontWeight: 'bold'},
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
   },
   tab: {
     paddingTop: 0,
-    backgroundColor: '#DEDEDE',
+    backgroundColor: 'black',
   },
 
   tabContainer: {
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     right: 0,
   },
 
-  tabLabel: {fontWeight: 'bold', color: 'black'},
+  tabLabel: {fontWeight: 'bold', color: 'white'},
 
   tabStyle: {width: SCREEN_WIDTH / 2, maxHeight: 45},
 });

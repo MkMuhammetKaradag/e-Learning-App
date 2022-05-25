@@ -1,5 +1,6 @@
 import {StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
 import React from 'react';
+import CustomStar from '../Star/CustomStar';
 
 const HomeCard = ({course, onSelect, screenWidth}) => {
   console.log(course);
@@ -20,16 +21,16 @@ const HomeCard = ({course, onSelect, screenWidth}) => {
             {course.description}
           </Text>
         </View>
-        <View style={{flexDirection: 'row', marginTop: 3}}>
-          <View style={{flexDirection: 'row'}}>
+        <View
+          style={{flexDirection: 'row', marginTop: 3, alignItems: 'center'}}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Text style={{color: '#E7E7E7'}}>4,5</Text>
-            <Text style={{color: '#E7E7E7', alignItems: 'center'}}>
-              {' '}
-              *****{' '}
-            </Text>
+            <View style={{marginLeft: 5}}>
+              <CustomStar width={90} height={17} score={4.7}></CustomStar>
+            </View>
           </View>
           <View>
-            <Text style={{marginLeft: 5, fontSize: 10, color: '#E7E7E7'}}>
+            <Text style={{marginLeft: 5, color: '#E7E7E7', fontSize: 10}}>
               ({course.reviews.length})
             </Text>
           </View>

@@ -33,8 +33,7 @@ const list3 = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#DEDEDE',
+    backgroundColor: 'black',
     padding: 5,
   },
   title: {
@@ -48,7 +47,7 @@ const Accordion = ({content, setSection}) => {
   return (
     <View style={styles.container}>
       {content && (
-        <ScrollView style={{flex: 1}}>
+        <View style={{flex: 1}}>
           {content.sections
             .sort((a, b) => a.order - b.order)
             .map((item, index) => (
@@ -59,7 +58,7 @@ const Accordion = ({content, setSection}) => {
               // <List {...{list}} />
               // <List {...{list}} />
             ))}
-        </ScrollView>
+        </View>
       )}
     </View>
   );

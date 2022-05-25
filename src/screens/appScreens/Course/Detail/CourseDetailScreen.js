@@ -32,7 +32,7 @@ import {isPurchas} from '../../../../context/AuthProvider/meReducers';
 const renderTabBar = props => (
   <TabBar
     {...props}
-    indicatorStyle={{backgroundColor: '#DEDEDE'}}
+    indicatorStyle={{backgroundColor: '#fff'}}
     tabStyle={styles.tabStyle}
     style={styles.tab}
     labelStyle={styles.tabLabel}
@@ -51,7 +51,7 @@ const CourseDetailScreen = ({route, navigation}) => {
   const layout = Dimensions.get('window').width;
   const dispatch = useDispatch();
   const [index, setIndex] = useState(0);
-  const [routes] = useState([{key: 1, title: 'Content'}]);
+  const [routes] = useState([{key: 1, title: 'İçerik'}]);
   const iscoursePurchas = useSelector(s => s.me.isPurchas);
 
   if (error) {
@@ -84,7 +84,7 @@ const CourseDetailScreen = ({route, navigation}) => {
   return (
     !iscoursePurchas && (
       <View style={styles.container}>
-        <ScrollView style={{flex: 1}}>
+        <ScrollView>
           <View>
             {/* <Card>
         {/* <Card.Title
@@ -122,16 +122,21 @@ const CourseDetailScreen = ({route, navigation}) => {
               <Text style={styles.price}>{data.price}</Text>
             </View>
           </View>
+
+          <TabView
+            navigationState={{index, routes}}
+            renderScene={renderScene}
+            onIndexChange={setIndex}
+            renderTabBar={renderTabBar}
+            initialLayout={layout}
+            // tabBarPosition="top"
+          />
+          {index == 0 && (
+            <Accordion
+              content={data.course.content}
+              setSection={setSection}></Accordion>
+          )}
         </ScrollView>
-        <TabView
-          navigationState={{index, routes}}
-          renderScene={renderScene}
-          onIndexChange={setIndex}
-          renderTabBar={renderTabBar}
-          initialLayout={layout}
-          sceneContainerStyle={{flex: 1}}
-          // tabBarPosition="top"
-        />
       </View>
     )
   );

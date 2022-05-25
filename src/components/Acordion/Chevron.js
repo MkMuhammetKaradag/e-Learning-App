@@ -12,13 +12,13 @@ const styles = StyleSheet.create({
     borderRadius: size / 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#525251',
+    backgroundColor: 'black',
   },
 });
 
 const Chevron = ({progress}) => {
   const style = useAnimatedStyle(() => ({
-    backgroundColor: mixColor(progress.value, '#525251', 'black'),
+    backgroundColor: mixColor(progress.value, 'black', 'black'),
     transform: [{rotateZ: `${mix(progress.value, 0, Math.PI)}rad`}],
   }));
   return (

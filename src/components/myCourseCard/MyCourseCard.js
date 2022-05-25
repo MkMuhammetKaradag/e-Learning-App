@@ -7,6 +7,7 @@ import {
   Image,
 } from 'react-native';
 import React from 'react';
+import CustomStar from '../Star/CustomStar';
 
 const MyCourseCard = ({course, onSelect, screenWidth, isWishList}) => {
   console.log(course);
@@ -34,8 +35,8 @@ const MyCourseCard = ({course, onSelect, screenWidth, isWishList}) => {
         </View>
         <View>
           <Text numberOfLines={1} style={styles.courseTeacher}>
-            {course.instructor.firstname} {'  '}
-            {course.instructor.lastname}
+            {course.instructor.firstname || 'teacher'} {'  '}
+            {course.instructor.lastname || 'isim yok'}
           </Text>
         </View>
         {!isWishList ? (
@@ -55,8 +56,7 @@ const MyCourseCard = ({course, onSelect, screenWidth, isWishList}) => {
                 <View style={{flexDirection: 'row'}}>
                   <Text style={{color: '#E7E7E7'}}>4,5</Text>
                   <Text style={{color: '#E7E7E7', alignItems: 'center'}}>
-                    {' '}
-                    *****{' '}
+                    <CustomStar width={80} height={15} score={4.5}></CustomStar>
                   </Text>
                 </View>
                 <View>

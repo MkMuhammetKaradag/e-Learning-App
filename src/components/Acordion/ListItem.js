@@ -5,27 +5,24 @@ import MAIcon from 'react-native-vector-icons/MaterialIcons';
 const LIST_ITEM_HEIGHT = 54;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 8,
     paddingHorizontal: 16,
-    borderBottomWidth: 2,
-    borderColor: '#f4f4f6',
+    borderBottomWidth: 1,
+    borderColor: '#DEDEDE',
     height: LIST_ITEM_HEIGHT,
   },
   name: {
     fontSize: 16,
+    color: '#fff',
   },
   pointsContainer: {
     borderRadius: 8,
 
     padding: 5,
-  },
-  points: {
-    color: 'white',
-    fontWeight: 'bold',
   },
 });
 
@@ -49,14 +46,14 @@ const ListItem = ({sectionContent, isLast, setSection}) => {
       </TouchableOpacity>
       <View style={styles.pointsContainer}>
         {sectionContent.type === 'VIDEO' && (
-          <ADIcon name="play" size={23} color="black"></ADIcon>
+          <ADIcon name="play" size={19} color="#fff"></ADIcon>
           // <Text style={styles.points}>{sectionContent.type}</Text>
         )}
         {sectionContent.type === 'QUIZ' && (
-          <MAIcon name="help" size={25} color="black"></MAIcon>
+          <MAIcon name="help" size={20} color="#fff"></MAIcon>
         )}
         {sectionContent.type === 'TEXT' && (
-          <MAIcon name="text-snippet" size={25} color="black"></MAIcon>
+          <MAIcon name="text-snippet" size={20} color="#fff"></MAIcon>
         )}
       </View>
     </View>

@@ -4,7 +4,10 @@ import CourseCard from '../../../../components/Courses/CourseCard';
 import useFetch from '../../../../hooks/useFetch/useFetch';
 import {myApi} from '../../../../Api';
 import Loading from '../../../../components/Loading/Loading';
-import {setWishlist} from '../../../../context/AuthProvider/meReducers';
+import {
+  isPurchas,
+  setWishlist,
+} from '../../../../context/AuthProvider/meReducers';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './MyWishlist.Styles';
 import MyCourseCard from '../../../../components/myCourseCard/MyCourseCard';
@@ -35,7 +38,7 @@ const MyWishlistScreen = ({navigation}) => {
   }
   const handleProductSelect = id => {
     console.log('girdimi', id);
-
+    dispatch(isPurchas({id: id}));
     navigation.navigate('CourseDetailScreen', {id});
   };
   const renderCourse = ({item}) => (

@@ -5,6 +5,7 @@ import {
   useWindowDimensions,
   SafeAreaView,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import useFetchOnly from '../../../../hooks/useFetch/useFetchOnly';
@@ -16,13 +17,15 @@ import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import Accordion from '../../../../components/Acordion/Accordin';
 import useFetch from '../../../../hooks/useFetch/useFetch';
 import DetailHeader from '../../../../components/DetailHeader/DetailHeader';
+import Quiz from '../../../../components/Quiz/Quiz';
 //import Video from 'react-native-video';
 import VideoPlayer from 'react-native-video-player';
-
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 const renderTabBar = props => (
   <TabBar
     {...props}
-    indicatorStyle={{backgroundColor: 'gray'}}
+    indicatorStyle={{backgroundColor: 'white'}}
     tabStyle={styles.tabStyle}
     style={styles.tab}
     labelStyle={styles.tabLabel}
@@ -41,8 +44,8 @@ const WatchCourseScreen = ({route, navigation}) => {
   const layout = useWindowDimensions();
   const [index, setIndex] = useState(0);
   const [routes] = useState([
-    {key: 1, title: 'First'},
-    {key: 2, title: 'Second'},
+    {key: 1, title: 'Yorumlar'},
+    {key: 2, title: 'Dersler'},
   ]);
 
   if (error) {
@@ -57,11 +60,7 @@ const WatchCourseScreen = ({route, navigation}) => {
       case 1:
         return <View style={{flex: 1, backgroundColor: 'red'}} />;
       case 2:
-        return (
-          <Accordion
-            content={data.course.content}
-            setSection={setSection}></Accordion>
-        );
+        return <View></View>;
     }
   };
 
@@ -72,57 +71,81 @@ const WatchCourseScreen = ({route, navigation}) => {
   // }, [data]);
   console.log('section', section);
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <Card>
-        {/* <Card.Title
-          title="Card Title"
-          subtitle="Card Subtitle"
-          left={LeftContent}
-        /> 
-        <Card.Content>
-          <Title>{data.course.title}</Title>
-          <Paragraph numberOfLines={2}>{data.course.description}</Paragraph>
-        </Card.Content>
-        <Card.Cover source={{uri: data.course.thumbnail}} />
+    <View style={styles.container}>
+      <ScrollView>
+        {/* {section ? (
+          <View>
+            <VideoPlayer
+              video={{
+                uri:
+                  section.type === 'VIDEO'
+                    ? section.video_url
+                    : section.type === 'QUIZ'
+                    ? 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'
+                    : '',
+              }}
+              thumbnail={{uri: data.course.thumbnail}}
+              fullscreen={true}
+              resizeMode={'stretch'}
+            />
+          </View>
+        ) : (
+          <Image
+            style={styles.image}
+            source={{
+              uri: data.course.thumbnail,
+            }}></Image>
+        )} */}
+        {section ? (
+          <View style={{height: 200, backgroundColor: 'red'}}>
+            {section.type == 'QUIZ' && (
+              <Quiz myApi={myApi} examId={section.exam}></Quiz>
+            )}
+          </View>
+        ) : (
+          <Text style={{color: '#fff', marginTop: 20}}>Guiz Değil</Text>
+        )}
 
         <View
           style={{
-            flex: 1,
+            shadowColor: '#000',
+            shadowOffset: {width: 0, height: 2},
+            shadowOpacity: 0.5,
+            shadowRadius: 2,
+            elevation: 10,
+            alignSelf: 'stretch',
           }}>
-          <Text>Cancel</Text>
-          <Text>Ok</Text>
+          <TabView
+            navigationState={{index, routes}}
+            renderScene={renderScene}
+            onIndexChange={setIndex}
+            renderTabBar={renderTabBar}
+            initialLayout={{width: layout.width}}
+            tabBarPosition="top"
+          />
         </View>
-      </Card> */}
-      {/* <DetailHeader course={data.course} navigation={navigation}></DetailHeader> */}
-      {section && (
-        <VideoPlayer
-          video={{
-            uri:
-              section.type === 'VIDEO'
-                ? section.video_url
-                : section.type === 'QUIZ'
-                ? 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'
-                : '',
-          }}
-          videoWidth={1600}
-          videoHeight={900}
-          thumbnail={{uri: data.course.thumbnail}}
-        />
-      )}
+        {index == 1 && (
+          <Accordion
+            content={data.course.content}
+            setSection={setSection}></Accordion>
+        )}
 
-      {/* <Image
+        {/* <View style={styles.body_container}>
+          <Text style={styles.title}>{data.course.title}</Text>
+          <Text numberOfLines={2} style={styles.description}>
+            {data.course.description}
+          </Text>
+          <Text style={styles.price}>{data.price}</Text>
+        </View> */}
+      </ScrollView>
+      {/* 
+      <Image
         style={styles.image}
         source={{
           uri: data.course.thumbnail,
         }}></Image> */}
-      <View style={styles.body_container}>
-        <Text style={styles.title}>{data.course.title}</Text>
-        <Text numberOfLines={2} style={styles.description}>
-          {data.course.description}
-        </Text>
-        <Text style={styles.price}>{data.price}</Text>
-      </View>
-      <View
+
+      {/* <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -131,15 +154,7 @@ const WatchCourseScreen = ({route, navigation}) => {
         }}>
         <Text>Cancel</Text>
         <Text>Ok</Text>
-      </View>
-
-      <TabView
-        navigationState={{index, routes}}
-        renderScene={renderScene}
-        onIndexChange={setIndex}
-        renderTabBar={renderTabBar}
-        initialLayout={{width: layout.width}}
-      />
+      </View> */}
 
       {/* <Button
         icon="camera"
@@ -147,7 +162,7 @@ const WatchCourseScreen = ({route, navigation}) => {
         onPress={() => console.log('Pressed')}>
         Paper test İçin Eklendi
       </Button> */}
-    </SafeAreaView>
+    </View>
   );
 };
 
