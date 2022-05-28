@@ -20,6 +20,7 @@ import DetailHeader from '../../../../components/DetailHeader/DetailHeader';
 import Quiz from '../../../../components/Quiz/Quiz';
 //import Video from 'react-native-video';
 import VideoPlayer from 'react-native-video-player';
+import Yorumlar from '../../../../components/Yorumlar/Yorumlar';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const renderTabBar = props => (
@@ -45,7 +46,7 @@ const WatchCourseScreen = ({route, navigation}) => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     {key: 1, title: 'Yorumlar'},
-    {key: 2, title: 'Dersler'},
+    {key: 2, title: 'İçerik'},
   ]);
 
   if (error) {
@@ -58,7 +59,7 @@ const WatchCourseScreen = ({route, navigation}) => {
   const renderScene = ({route}) => {
     switch (route.key) {
       case 1:
-        return <View style={{flex: 1, backgroundColor: 'red'}} />;
+        return <View></View>;
       case 2:
         return <View></View>;
     }
@@ -69,7 +70,7 @@ const WatchCourseScreen = ({route, navigation}) => {
   //     console.log(data);
   //   }
   // }, [data]);
-  console.log('section', section);
+  // console.log('section', section);
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -97,9 +98,24 @@ const WatchCourseScreen = ({route, navigation}) => {
             }}></Image>
         )} */}
         {section ? (
-          <View style={{height: 200, backgroundColor: 'red'}}>
+          <View style={{backgroundColor: 'black'}}>
             {section.type == 'QUIZ' && (
               <Quiz myApi={myApi} examId={section.exam}></Quiz>
+            )}
+            {section.type == 'VIDEO' && (
+              <VideoPlayer
+                video={{
+                  uri:
+                    section.type === 'VIDEO'
+                      ? section.video_url
+                      : section.type === 'QUIZ'
+                      ? 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'
+                      : '',
+                }}
+                thumbnail={{uri: data.course.thumbnail}}
+                fullscreen={true}
+                resizeMode={'stretch'}
+              />
             )}
           </View>
         ) : (
@@ -128,6 +144,11 @@ const WatchCourseScreen = ({route, navigation}) => {
           <Accordion
             content={data.course.content}
             setSection={setSection}></Accordion>
+        )}
+        {index == 0 && (
+          <Yorumlar
+            id={data.course._id}
+            reviews={data.course.reviews}></Yorumlar>
         )}
 
         {/* <View style={styles.body_container}>

@@ -5,6 +5,7 @@ import {
   View,
   Dimensions,
   Button,
+  TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import onlyPost from '../../hooks/usePost/onlyPost';
@@ -42,7 +43,7 @@ const Quiz = ({examId, myApi}) => {
 
   const handleFinish = async () => {
     const newAnswers = [...answers, answer];
-    console.log(newAnswers);
+    //console.log(newAnswers);
   };
 
   return (
@@ -58,14 +59,27 @@ const Quiz = ({examId, myApi}) => {
               (question, idx) =>
                 activeIdx == idx && (
                   <View>
-                    <View style={{alignItems: 'center'}}>
-                      <Text>{idx + 1}</Text>
-                      <Text>{question.text}</Text>
+                    <View
+                      style={{
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        marginLeft: '10%',
+                        marginBottom: 20,
+                      }}>
+                      <Text style={{color: '#fff'}}>
+                        {idx + 1}) {'  '}
+                      </Text>
+                      <Text style={{color: '#fff'}}>{question.text}</Text>
                     </View>
                     <View style={{alignItems: 'center'}}>
                       {question.type === 'OPEN_ENDED' && (
                         <TextInput
-                          style={{borderWidth: 1, width: SCREEN_WİDTH * 0.8}}
+                          style={{
+                            borderWidth: 1,
+                            width: SCREEN_WİDTH * 0.8,
+                            borderColor: '#fff',
+                            color: '#fff',
+                          }}
                           multiline
                           numberOfLines={4}
                           value={answer}
@@ -73,47 +87,65 @@ const Quiz = ({examId, myApi}) => {
                         />
                       )}
                       {question.type === 'MULTIPLE_CHOICES_SINGLE_ANSWER' && (
-                        // <FormControl className="w-full">
-                        //   <RadioGroup
-                        //     aria-labelledby="demo-radio-buttons-group-label"
-                        //     defaultValue="female"
-                        //     name="radio-buttons-group"
-                        //     value={answer}
-                        //     onChange={e => setAnswer(e.target.value)}>
-                        //     {question.options.map(option => (
-                        //       <FormControlLabel
-                        //         value={option}
-                        //         key={option}
-                        //         control={<Radio />}
-                        //         label={option}
-                        //       />
-                        //     ))}
-                        //   </RadioGroup>
-                        // </FormControl>
                         <Radio.Group
                           name="exampleGroup"
                           colorScheme="success"
                           accessibilityLabel="pick an option"
                           onChange={setAnswer}>
                           {question.options.map(option => (
-                            <Radio colorScheme="success" value={option} my={1}>
-                              {option}
+                            <Radio
+                              size="sm"
+                              colorScheme="success"
+                              value={option}
+                              my={1}>
+                              <Text style={{color: '#fff'}}>{option}</Text>
                             </Radio>
                           ))}
                         </Radio.Group>
                       )}
                     </View>
-                    <View>
+                    <View
+                      style={{
+                        height: 40,
+                        alignItems: 'flex-end',
+                        marginRight: 20,
+                      }}>
                       {activeIdx === data.exam.questions.length - 1 ? (
-                        <Button
+                        <TouchableOpacity
                           disabled={answer.length === 0}
                           onPress={handleFinish}
-                          title="Bitir"></Button>
+                          style={{marginTop: 20}}>
+                          <Text
+                            style={{
+                              color: '#fff',
+                              fontSize: 18,
+                              fontWeight: 'bold',
+                            }}>
+                            Bitir
+                          </Text>
+                        </TouchableOpacity>
                       ) : (
-                        <Button
+                        // <Button
+                        //   ></Button>
+
+                        <TouchableOpacity
                           disabled={answer.length === 0}
                           onPress={handleNext}
-                          title="Sonraki"></Button>
+                          style={{marginTop: 20}}>
+                          <Text
+                            style={{
+                              color: '#fff',
+                              fontSize: 18,
+                              fontWeight: 'bold',
+                            }}>
+                            Sonraki
+                          </Text>
+                        </TouchableOpacity>
+                        // <Button
+                        //   disabled={answer.length === 0}
+                        //   onPress={handleNext}
+                        //   color="black"
+                        //   title="Sonraki"></Button>
                       )}
                     </View>
                   </View>

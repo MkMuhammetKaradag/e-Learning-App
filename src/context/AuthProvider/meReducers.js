@@ -8,6 +8,7 @@ export const meSlice = createSlice({
     courses: [],
     selectCourse: null,
     isPurchas: false,
+    cart: [],
   },
   reducers: {
     setCourses: (state, action) => {
@@ -40,6 +41,31 @@ export const meSlice = createSlice({
         state.wishlist.push(itemWishlist);
       }
     },
+    setCart: (state, action) => {
+      const {cart} = action.payload;
+      // console.log('reduceriçi-cart', cart);
+      state.cart = cart;
+    },
+    addCart: (state, action) => {
+      const {itemCart} = action.payload;
+      let index = state.cart.findIndex(s => s._id == itemCart._id);
+      if (index > -1) {
+        console.log('reducer içi true');
+        state.cart.splice(index, 1);
+      } else {
+        console.log('reducer içi false', itemCart);
+
+        state.cart.push(itemCart);
+      }
+    },
+    removeCart: (state, action) => {
+      const {itemCart} = action.payload;
+      let index = state.cart.findIndex(s => s._id == itemCart._id);
+      if (index > -1) {
+        console.log('reducer içi true');
+        state.cart.splice(index, 1);
+      }
+    },
     isPurchas: (state, action) => {
       const {id} = action.payload;
       let index = state.courses.findIndex(s => s._id == id);
@@ -51,7 +77,15 @@ export const meSlice = createSlice({
   },
 });
 
-export const {setCourses, cleanCourse, setWishlist, addWishlist, isPurchas} =
-  meSlice.actions;
+export const {
+  setCourses,
+  cleanCourse,
+  setWishlist,
+  addWishlist,
+  isPurchas,
+  setCart,
+  addCart,
+  removeCart,
+} = meSlice.actions;
 
 export default meSlice.reducer;

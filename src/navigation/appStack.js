@@ -11,6 +11,7 @@ import MyWishlistScreen from '../screens/appScreens/Course/Wishlist/MyWishlistSc
 import RootClientTabs from './RootClientTabs';
 import MyDrawerNavigator from './DrawerNavigator';
 import WatchCourseScreen from '../screens/appScreens/Course/WatchCourse/WatchCourseScreen';
+import ShoppingCartScreen from '../screens/appScreens/ShoppingCart/ShoppingCartScreen';
 const Tab = createBottomTabNavigator();
 const CourseStack = createNativeStackNavigator();
 function AppStack() {
@@ -38,6 +39,12 @@ function AppStack() {
       <App.Screen
         name="WatchCourseScreen"
         component={WatchCourseScreen}
+        options={{
+          headerShown: false,
+        }}></App.Screen>
+      <App.Screen
+        name="ShoppingCartScreen"
+        component={ShoppingCartScreen}
         options={{
           headerShown: false,
         }}></App.Screen>

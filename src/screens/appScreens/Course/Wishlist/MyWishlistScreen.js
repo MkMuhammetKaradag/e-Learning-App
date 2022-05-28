@@ -37,7 +37,7 @@ const MyWishlistScreen = ({navigation}) => {
     return <Loading></Loading>;
   }
   const handleProductSelect = id => {
-    console.log('girdimi', id);
+    //console.log('girdimi', id);
     dispatch(isPurchas({id: id}));
     navigation.navigate('CourseDetailScreen', {id});
   };

@@ -1,8 +1,8 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Dimensions} from 'react-native';
 import React from 'react';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-
-const Header = ({title, navigation}) => {
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const Header = ({title, navigation, type, searchData}) => {
   return (
     <View style={styles.header}>
       <View
@@ -20,10 +20,24 @@ const Header = ({title, navigation}) => {
             navigation.goBack();
           }}></MCIcon>
       </View>
-
-      <View style={{alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={styles.headerText}>{title}</Text>
-      </View>
+      {type == 'Search' ? (
+        <TextInput
+          style={{
+            color: '#fff',
+            borderWidth: 0.5,
+            borderRadius: 3,
+            borderColor: 'white',
+            width: SCREEN_WIDTH * 0.6,
+            height: 35,
+          }}
+          onSubmitEditing={e => searchData(e.nativeEvent.text)}
+          placeholder="Arama"
+          placeholderTextColor={'#fff'}></TextInput>
+      ) : (
+        <View style={{alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={styles.headerText}>{title}</Text>
+        </View>
+      )}
 
       <View
         style={{
@@ -31,7 +45,13 @@ const Header = ({title, navigation}) => {
           justifyContent: 'center',
           marginRight: 15,
         }}>
-        <MCIcon name={'cart'} color={'#fff'} size={32}></MCIcon>
+        <MCIcon
+          onPress={() => {
+            navigation.navigate('ShoppingCartScreen');
+          }}
+          name={'cart'}
+          color={'#fff'}
+          size={32}></MCIcon>
       </View>
     </View>
   );
@@ -45,6 +65,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 50,
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   headerText: {
     color: '#fff',

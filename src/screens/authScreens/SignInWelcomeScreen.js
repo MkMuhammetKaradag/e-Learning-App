@@ -2,6 +2,7 @@ import {StyleSheet, Text, View, Button} from 'react-native';
 import React from 'react';
 
 const SignInWelcomeScreen = ({navigation}) => {
+  console.log('sdsd');
   return (
     <View style={{flex: 1}}>
       <View

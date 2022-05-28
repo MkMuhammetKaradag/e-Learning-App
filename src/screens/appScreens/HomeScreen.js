@@ -10,14 +10,18 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {setUser} from '../../context/AuthProvider/userReducers';
 import Error from '../../components/Error/Error';
 import Loading from '../../components/Loading/Loading';
 import useFetch from '../../hooks/useFetch/useFetch';
 import {myApi} from '../../Api';
-import {isPurchas, setCourses} from '../../context/AuthProvider/meReducers';
+import {
+  isPurchas,
+  setCart,
+  setCourses,
+} from '../../context/AuthProvider/meReducers';
 import CourseCard from '../../components/Courses/CourseCard';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import HomeCard from '../../components/HomeCard/HomeCard';
@@ -25,7 +29,7 @@ import HomeCard from '../../components/HomeCard/HomeCard';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
-  const iscoursePurchas = useSelector(s => s.me.isPurchas);
+
   const {
     loading: coursLoading,
     data: courseData,
@@ -38,18 +42,29 @@ const HomeScreen = ({navigation}) => {
     error: mycourseError,
     fetchData: mycourseFetchData,
   } = useFetch();
-  const Courses = useSelector(s => s.me.courses);
+  const {
+    loading: myCartLoadin,
+    data: myCartData,
+    error: myCartError,
+    fetchData: myCartFetchData,
+  } = useFetch();
+  // const Courses = useSelector(s => s.me.courses);
   useEffect(() => {
     (async () => {
-      await courseFetchData(`${myApi}/courses`);
       await mycourseFetchData(`${myApi}/courses/list-purchased-courses`);
+      await myCartFetchData(`${myApi}/users/getCart`);
+      await courseFetchData(`${myApi}/courses`);
     })();
   }, []);
 
   useEffect(() => {
     if (courseData) {
       // dispatch(setCourses({courses: data.courses}));
-      console.log('hi courses');
+      // console.log(
+      //   courseData.courses.filter(
+      //     c => !mycourseData.courses.map(mc => mc._id).includes(c._id),
+      //   ),
+      // );
     }
   }, [courseData]);
   useEffect(() => {
@@ -58,6 +73,12 @@ const HomeScreen = ({navigation}) => {
       // console.log('hi courses-satın alınanlar ');
     }
   }, [mycourseData]);
+  useEffect(() => {
+    if (myCartData) {
+      dispatch(setCart({cart: myCartData.cart}));
+      // console.log('hi courses-satın alınanlar ');
+    }
+  }, [myCartData]);
 
   if (courseError) {
     return (
@@ -75,6 +96,7 @@ const HomeScreen = ({navigation}) => {
 
     navigation.navigate('CourseDetailScreen', {id});
   };
+
   const renderCourse = ({item}) => (
     <View style={{paddingBottom: 20}}>
       <HomeCard

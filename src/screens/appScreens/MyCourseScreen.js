@@ -47,7 +47,7 @@ const MyCourseScreen = ({navigation}) => {
   //   return <Loading></Loading>;
   // }
   const handleProductSelect = id => {
-    console.log('girdimi', id);
+    //console.log('girdimi', id);
     navigation.navigate('WatchCourseScreen', {id});
   };
   const renderCourse = ({item}) => (

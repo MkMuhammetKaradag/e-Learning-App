@@ -10,6 +10,7 @@ import HomeScreen from '../screens/appScreens/HomeScreen';
 import MyCourseScreen from '../screens/appScreens/MyCourseScreen';
 import CourseDetailScreen from '../screens/appScreens/Course/Detail/CourseDetailScreen';
 import MyWishlistScreen from '../screens/appScreens/Course/Wishlist/MyWishlistScreen';
+import SearchScreen from '../screens/appScreens/Search/SearchScreen';
 // import ClientStack from './clientStack';
 
 const ClientTabs = createBottomTabNavigator();
@@ -53,7 +54,7 @@ const RootClientTabs = () => {
             />
           ),
         }}
-        component={MyWishlistScreen}></ClientTabs.Screen>
+        component={SearchScreen}></ClientTabs.Screen>
       <ClientTabs.Screen
         name="MyCourseScreen"
         options={{

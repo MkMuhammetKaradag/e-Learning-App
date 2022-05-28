@@ -5,6 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {configureStore} from '@reduxjs/toolkit';
 import userReducers from './userReducers';
 import MeReducers from './meReducers';
+import useFetch from '../../hooks/useFetch/useFetch';
+import {myApi} from '../../Api';
 const UserProvider = ({children}) => {
   const reducer = {
     auth: userReducers,
@@ -12,12 +14,21 @@ const UserProvider = ({children}) => {
   };
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const {loading, data, error, fetchData} = useFetch();
   useEffect(() => {
-    AsyncStorage.getItem('@USER').then(userSession => {
-      userSession && setUser(JSON.parse(userSession));
-      setIsLoading(false);
-    });
+    (async () => {
+      await fetchData(`${myApi}/auth/me`);
+    })();
   }, []);
+  useEffect(() => {
+    if (data) {
+      AsyncStorage.getItem('@USER').then(userSession => {
+        userSession && setUser(JSON.parse(userSession));
+        setIsLoading(false);
+      });
+    }
+  }, [data]);
+
   const userStore = configureStore({
     reducer: reducer,
     preloadedState: {

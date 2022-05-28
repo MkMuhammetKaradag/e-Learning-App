@@ -8,7 +8,7 @@ const useFetch = () => {
   const fetchData = async url => {
     try {
       setLoading(true);
-      console.log(url);
+      //console.log(url);
       const {data: res} = await axios.get(url, {
         withCredentials: true,
       });

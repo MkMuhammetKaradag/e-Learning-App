@@ -3,7 +3,7 @@ import React from 'react';
 import CustomStar from '../Star/CustomStar';
 
 const HomeCard = ({course, onSelect, screenWidth}) => {
-  console.log(course);
+  //console.log(course);
   return (
     <View style={{marginRight: 5, marginLeft: 5, maxWidth: 210}}>
       <TouchableOpacity onPress={onSelect}>
