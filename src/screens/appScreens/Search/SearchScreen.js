@@ -11,10 +11,13 @@ import Header from '../../../components/Header/Header';
 import MyCourseCard from '../../../components/myCourseCard/MyCourseCard';
 import useFetch from '../../../hooks/useFetch/useFetch';
 import {myApi} from '../../../Api';
+import {useDispatch} from 'react-redux';
+import {isPurchas} from '../../../context/AuthProvider/meReducers';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SearchScreen = ({navigation}) => {
   // const [search, setSearch] = useState('');
   const {loading, data, error, fetchData} = useFetch();
+  const dispatch = useDispatch();
   const searchData = async search => {
     console.log(search);
     await fetchData(`${myApi}/courses/search-courses?search=${search}`);
@@ -36,7 +39,7 @@ const SearchScreen = ({navigation}) => {
         onSelect={() => handleProductSelect(item._id)}></CourseCard> */}
     </View>
   );
-  console.log(data);
+
   return (
     <SafeAreaView style={{flex: 1, paddingTop: 24, backgroundColor: 'black'}}>
       <Header
@@ -58,7 +61,9 @@ const SearchScreen = ({navigation}) => {
           }}>
           Kurslar
         </Text>
-        <FlatList data={data} renderItem={renderCourse}></FlatList>
+        {data?.courses && (
+          <FlatList data={data.courses} renderItem={renderCourse}></FlatList>
+        )}
       </View>
     </SafeAreaView>
   );

@@ -117,6 +117,11 @@ const WatchCourseScreen = ({route, navigation}) => {
                 resizeMode={'stretch'}
               />
             )}
+            {section.type == 'TEXT' && (
+              <View>
+                <Text>{section.text}</Text>
+              </View>
+            )}
           </View>
         ) : (
           <Text style={{color: '#fff', marginTop: 20}}>Guiz Değil</Text>

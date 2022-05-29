@@ -5,12 +5,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {configureStore} from '@reduxjs/toolkit';
 import userReducers from './userReducers';
 import MeReducers from './meReducers';
+import CourseReducers from './coursReducers';
 import useFetch from '../../hooks/useFetch/useFetch';
 import {myApi} from '../../Api';
 const UserProvider = ({children}) => {
   const reducer = {
     auth: userReducers,
     me: MeReducers,
+    course: CourseReducers,
   };
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);

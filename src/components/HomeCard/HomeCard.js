@@ -7,7 +7,13 @@ const HomeCard = ({course, onSelect, screenWidth}) => {
   return (
     <View style={{marginRight: 5, marginLeft: 5, maxWidth: 210}}>
       <TouchableOpacity onPress={onSelect}>
-        <Image style={styles.image} source={{uri: course.thumbnail}}></Image>
+        <Image
+          style={styles.image}
+          source={{
+            uri:
+              course.thumbnail ||
+              'https://www.evrensel.net/images/840/upload/dosya/177925.jpg',
+          }}></Image>
       </TouchableOpacity>
 
       <View style={styles.bodyContainer}>

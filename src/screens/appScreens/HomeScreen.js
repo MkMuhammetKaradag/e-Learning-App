@@ -25,11 +25,13 @@ import {
 import CourseCard from '../../components/Courses/CourseCard';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import HomeCard from '../../components/HomeCard/HomeCard';
+import {setCourseCourses} from '../../context/AuthProvider/coursReducers';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const HomeScreen = ({navigation}) => {
+  const filterCourse = useSelector(s => s.course.courses);
   const dispatch = useDispatch();
-
+  // const [filterCourse, setFilterCourse] = useState([]);
   const {
     loading: coursLoading,
     data: courseData,
@@ -60,21 +62,24 @@ const HomeScreen = ({navigation}) => {
   useEffect(() => {
     if (courseData) {
       // dispatch(setCourses({courses: data.courses}));
-      // console.log(
-      //   courseData.courses.filter(
-      //     c => !mycourseData.courses.map(mc => mc._id).includes(c._id),
-      //   ),
-      // );
+
+      const filterdata = courseData.courses.filter(
+        c => !mycourseData.courses.map(mc => mc._id).includes(c._id),
+      );
+      dispatch(setCourseCourses({courses: filterdata}));
+      //setFilterCourse(filterdata);
     }
   }, [courseData]);
   useEffect(() => {
     if (mycourseData) {
+      console.log('her türlü-2', mycourseData.courses.length);
       dispatch(setCourses({courses: mycourseData.courses}));
       // console.log('hi courses-satın alınanlar ');
     }
   }, [mycourseData]);
   useEffect(() => {
     if (myCartData) {
+      console.log('her türlü-1');
       dispatch(setCart({cart: myCartData.cart}));
       // console.log('hi courses-satın alınanlar ');
     }
@@ -136,7 +141,7 @@ const HomeScreen = ({navigation}) => {
             <FlatList
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-              data={courseData.courses.slice(0, 3)}
+              data={filterCourse.slice(0, 3)}
               renderItem={renderCourse}></FlatList>
           </View>
           <View
@@ -156,7 +161,7 @@ const HomeScreen = ({navigation}) => {
               Bizim ile Çalışın
             </Text>
           </View>
-          {courseData.courses.length > 3 && (
+          {filterCourse.length > 3 && (
             <View style={{marginTop: 20}}>
               <Text
                 style={{
@@ -171,7 +176,7 @@ const HomeScreen = ({navigation}) => {
               <FlatList
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
-                data={courseData.courses.slice(3, 6)}
+                data={filterCourse.slice(3, 6)}
                 renderItem={renderCourse}></FlatList>
             </View>
           )}

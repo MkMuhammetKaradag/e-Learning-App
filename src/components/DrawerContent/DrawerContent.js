@@ -12,12 +12,14 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import {Avatar} from 'native-base';
 // import {Icon, Avatar, Button} from 'react-native-elements';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setUser} from '../../context/AuthProvider/userReducers';
 const DrawerContent = props => {
   const dispatch = useDispatch();
+  const user = useSelector(s => s.auth.user);
 
   const SignOut = async () => {
     console.log('çıkış yapıldı');
@@ -32,82 +34,28 @@ const DrawerContent = props => {
               flexDirection: 'row',
               alignItems: 'center',
               paddingLeft: 10,
-
               marginTop: 10,
+              marginBottom: 10,
             }}>
-            {/* <Avatar
-              rounded
-              avatarStyle={styles.avatar}
-              size={75}
-              source={{
-                uri: 'https://raw.githubusercontent.com/EfficientProgramming01/xpressfood/master/src/assets/fastfood.png',
-              }}></Avatar> */}
+            <Avatar size={'xl'} backgroundColor={'black'}>
+              {user.firstname?.substring(0, 1) || 'm'}
+            </Avatar>
 
             <View style={{paddingLeft: 20}}>
               <Text
                 style={{
                   fontWeight: 'bold',
                   fontSize: 18,
-                  color: 'gray',
+                  color: 'black',
                 }}>
-                Mami
+                {user.firstname}
               </Text>
               <Text
                 style={{
                   fontSize: 14,
-                  color: 'gray',
+                  color: 'black',
                 }}>
-                mami@test.com
-              </Text>
-            </View>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              marginTop: 10,
-              alignItems: 'center',
-              justifyContent: 'space-evenly',
-            }}>
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  fontWeight: 'bold',
-                  fontSize: 18,
-                  color: 'gray',
-                }}>
-                1
-              </Text>
-              <Text
-                style={{
-                  fontSize: 14,
-                  color: 'gray',
-                }}>
-                My Favorites
-              </Text>
-            </View>
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  fontWeight: 'bold',
-                  fontSize: 18,
-                  color: 'gray',
-                }}>
-                0
-              </Text>
-              <Text
-                style={{
-                  fontSize: 14,
-                  color: 'gray',
-                }}>
-                Shoping Card
+                {user.email}
               </Text>
             </View>
           </View>

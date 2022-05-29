@@ -20,6 +20,10 @@ export const meSlice = createSlice({
 
       state.courses = courses;
     },
+    addCourses: (state, action) => {
+      const {courses} = action.payload;
+      state.courses.push(...courses);
+    },
     setWishlist: (state, action) => {
       const {wishlist} = action.payload;
       //console.log('reducer içi asa', wishlist);
@@ -66,6 +70,9 @@ export const meSlice = createSlice({
         state.cart.splice(index, 1);
       }
     },
+    clearCart: (state, action) => {
+      state.cart = [];
+    },
     isPurchas: (state, action) => {
       const {id} = action.payload;
       let index = state.courses.findIndex(s => s._id == id);
@@ -79,6 +86,7 @@ export const meSlice = createSlice({
 
 export const {
   setCourses,
+  addCourses,
   cleanCourse,
   setWishlist,
   addWishlist,
@@ -86,6 +94,7 @@ export const {
   setCart,
   addCart,
   removeCart,
+  clearCart,
 } = meSlice.actions;
 
 export default meSlice.reducer;
