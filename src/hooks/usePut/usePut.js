@@ -1,17 +1,16 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-const usePost = () => {
+const usePut = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const postData = async (url, apiData) => {
+  const putData = async (url, apiData) => {
     try {
       setError(null);
       setLoading(true);
-      // setError(null);
-      //console.log('usePost', apiData);
-      const {data: responseData} = await axios.post(url, apiData, {
+
+      const {data: responseData} = await axios.put(url, apiData, {
         withCredentials: true,
       });
       setData(responseData);
@@ -24,10 +23,7 @@ const usePost = () => {
       setError(error);
     }
   };
-  // useEffect(() => {
-  //   postData();
-  // }, []);
 
-  return {loading, error, data, postData};
+  return {loading, error, data, putData};
 };
-export default usePost;
+export default usePut;

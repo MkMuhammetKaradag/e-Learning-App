@@ -112,19 +112,47 @@ const WatchCourseScreen = ({route, navigation}) => {
                       ? 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4'
                       : '',
                 }}
+                autoplay={true}
                 thumbnail={{uri: data.course.thumbnail}}
                 fullscreen={true}
-                resizeMode={'stretch'}
+                resizeMode={'cover'}
               />
             )}
             {section.type == 'TEXT' && (
-              <View>
-                <Text>{section.text}</Text>
+              <View
+                style={{
+                  margin: 20,
+                  justifyContent: 'center',
+                  flexDirection: 'column',
+                }}>
+                <View style={{marginBottom: 20}}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontWeight: 'bold',
+                      fontSize: 20,
+                    }}
+                    numberOfLines={1}>
+                    {section.title}
+                  </Text>
+                </View>
+
+                <Text style={{color: '#fff'}}>{section.text}</Text>
               </View>
             )}
           </View>
         ) : (
-          <Text style={{color: '#fff', marginTop: 20}}>Guiz Değil</Text>
+          <Image
+            source={{
+              uri:
+                data.course.thumbnail ||
+                'https://upload.wikimedia.org/wikipedia/tr/7/70/Marmara_Üniversitesi_logo.png',
+            }}
+            style={{
+              width: SCREEN_WIDTH,
+              height: SCREEN_HEIGHT * 0.3,
+              resizeMode: 'contain',
+            }}></Image>
         )}
 
         <View

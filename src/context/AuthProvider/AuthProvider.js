@@ -24,6 +24,7 @@ const UserProvider = ({children}) => {
   }, []);
   useEffect(() => {
     if (data) {
+      console.log('data-provider', data);
       AsyncStorage.getItem('@USER').then(userSession => {
         userSession && setUser(JSON.parse(userSession));
         setIsLoading(false);

@@ -1,16 +1,16 @@
-import {StyleSheet, Text, View, TextInput} from 'react-native';
+import {StyleSheet, Text, View, TextInput, Dimensions} from 'react-native';
 import React, {useState} from 'react';
 import {Avatar, Button} from 'native-base';
 import Star from '../Star/CustomStar';
 import {Rating} from 'react-native-ratings';
 import usePost from '../../hooks/usePost/usePost';
 import {myApi} from '../../Api';
-
+const SCREEN_WIDTH = Dimensions.get('window').width;
 const Yorumlar = ({reviews, id}) => {
   const [rating, setRating] = useState(0);
   const {data, loading, error, postData} = usePost();
   const [text, setText] = useState('');
-
+  console.log(reviews);
   const ratingCompleted = val => {
     setRating(val);
   };
@@ -21,10 +21,9 @@ const Yorumlar = ({reviews, id}) => {
         description: text,
         rating,
       });
+      setRating(0);
+      setText('');
     }
-
-    setRating(0);
-    setText('');
   };
   return (
     <View style={{flex: 1, backgroundColor: 'black', margin: 10}}>
@@ -71,22 +70,28 @@ const Yorumlar = ({reviews, id}) => {
             flex: 1,
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'space-between',
             marginTop: 12,
+            paddingBottom: 12,
+            borderBottomWidth: 0.5,
+            borderColor: 'gray',
+            width: SCREEN_WIDTH,
           }}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Avatar
-              width={10}
-              height={10}
-              source={{
-                uri: `https://ui-avatars.com/api/?name=${item.user.firstname}`,
-              }}></Avatar>
-            <Text style={{color: '#fff', marginLeft: 5}}>
+            <Avatar width={10} height={10}>
+              {item.user.email?.substring(0, 3) || 'm'}
+            </Avatar>
+            <Text
+              numberOfLines={2}
+              style={{
+                color: '#fff',
+                marginLeft: 5,
+                width: SCREEN_WIDTH * 0.73,
+              }}>
               {item.description}
             </Text>
           </View>
-          <View style={{}}>
-            <Star score={item.rating} width={50} height={12}></Star>
+          <View>
+            <Star score={item.rating} width={60} height={12}></Star>
           </View>
         </View>
       ))}

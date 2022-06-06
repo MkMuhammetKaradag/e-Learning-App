@@ -7,8 +7,8 @@ import {useSelector} from 'react-redux';
 const RootNavigator = () => {
   const userSession = useSelector(s => s.auth.user);
   const isAuthLoading = useSelector(s => s.auth.isAuthLoading);
-  //console.log('isLoading:', isAuthLoading);
-  //console.log('SESSİON', userSession);
+  console.log('isLoading:', isAuthLoading);
+  console.log('SESSİON', userSession);
   const Loading = () => {
     return (
       <View>

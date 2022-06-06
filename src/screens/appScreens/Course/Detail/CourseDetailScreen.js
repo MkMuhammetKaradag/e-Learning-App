@@ -19,6 +19,7 @@ import useFetch from '../../../../hooks/useFetch/useFetch';
 import DetailHeader from '../../../../components/DetailHeader/DetailHeader';
 import {useDispatch, useSelector} from 'react-redux';
 import {isPurchas} from '../../../../context/AuthProvider/meReducers';
+import Header from '../../../../components/Header/Header';
 // const SecondRoute = () => (
 //   <View style={{flex: 1}}>
 //     <Accordion></Accordion>
@@ -85,6 +86,7 @@ const CourseDetailScreen = ({route, navigation}) => {
     !iscoursePurchas && (
       <View style={styles.container}>
         <ScrollView>
+          {/* <Header navigation={navigation} title={'Course'}></Header> */}
           <View>
             {/* <Card>
         {/* <Card.Title

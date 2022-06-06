@@ -4,7 +4,7 @@ import React from 'react';
 const SignInWelcomeScreen = ({navigation}) => {
   console.log('sdsd');
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: 'black'}}>
       <View
         style={{
           flex: 3,
@@ -16,7 +16,7 @@ const SignInWelcomeScreen = ({navigation}) => {
         <Text
           style={{
             fontSize: 26,
-            color: 'black',
+            color: '#fff',
             fontWeight: 'bold',
           }}>
           DISCOVER E-Learning
@@ -24,7 +24,7 @@ const SignInWelcomeScreen = ({navigation}) => {
         <Text
           style={{
             fontSize: 26,
-            color: 'black',
+            color: '#fff',
             fontWeight: 'bold',
           }}>
           IN YOUR AREA
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   headerHeight: 40,
   styledButton: {
-    backgroundColor: '#ff8c52',
+    backgroundColor: 'black',
     alignContent: 'center',
     borderRadius: 12,
     borderWidth: 1,

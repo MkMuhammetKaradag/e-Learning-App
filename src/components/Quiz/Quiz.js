@@ -14,10 +14,17 @@ import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
 import {Radio, Center, NativeBaseProvider} from 'native-base';
 import {Platform} from 'react-native';
+import usePut from '../../hooks/usePut/usePut';
 const SCREEN_WİDTH = Dimensions.get('window').width;
 
 const Quiz = ({examId, myApi}) => {
   const {loading, data, error, fetchData} = useFetch();
+  const {
+    data: putdata,
+    loading: putloading,
+    error: puterror,
+    putData,
+  } = usePut();
   const [exam, setExam] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeIdx, setActiveIdx] = useState(0);
@@ -43,18 +50,22 @@ const Quiz = ({examId, myApi}) => {
 
   const handleFinish = async () => {
     const newAnswers = [...answers, answer];
-    //console.log(newAnswers);
+    setAnswers(newAnswers);
+    setAnswer('');
+    console.log(newAnswers);
+    await putData(`${myApi}/courses/exams/complete-exam/${examId}`, newAnswers);
+    console.log('geldi');
   };
 
   return (
     <View>
-      {data.exam.isComplited ? (
+      {data.exam.isCompleted ? (
         <View>
-          <Text>Hello Sınav Girildi</Text>
+          <Text style={{color: '#fff'}}>Sınav Daha önce Tamamlanmıştır</Text>
         </View>
       ) : (
         data.exam.questions && (
-          <View>
+          <View key={data.exam_id}>
             {data.exam.questions.map(
               (question, idx) =>
                 activeIdx == idx && (

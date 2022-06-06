@@ -10,7 +10,7 @@ import React from 'react';
 import CustomStar from '../Star/CustomStar';
 
 const MyCourseCard = ({course, onSelect, screenWidth, isWishList}) => {
-  // console.log(course);
+  console.log('reviews', course.reviews);
   return (
     <TouchableOpacity onPress={onSelect} style={styles.container}>
       <View>

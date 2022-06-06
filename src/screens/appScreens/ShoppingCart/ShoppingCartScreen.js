@@ -43,7 +43,7 @@ const ShoppingCartScreen = ({navigation}) => {
   useEffect(() => {
     const total = Cart.reduce((p, c) => p + c.price, 0);
     setTotalPrice(total);
-  }, []);
+  }, [Cart]);
 
   const renderCourse = ({item}) => (
     <View style={{paddingBottom: 20}}>
@@ -74,12 +74,13 @@ const ShoppingCartScreen = ({navigation}) => {
           Kurslar
         </Text>
         <FlatList data={Cart} renderItem={renderCourse}></FlatList>
-
-        <Button
-          title={`Satınal   {${totalPrice}}`}
-          style={{color: '#fff'}}
-          disabled={loading || totalPrice == 0}
-          onPress={handleBuyCourses}></Button>
+        {Cart?.length > 0 && (
+          <Button
+            title={`Satınal   {${totalPrice}}`}
+            style={{color: '#fff'}}
+            //disabled={loading || totalPrice == 0}
+            onPress={handleBuyCourses}></Button>
+        )}
       </View>
     </SafeAreaView>
   );

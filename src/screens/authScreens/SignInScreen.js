@@ -1,4 +1,11 @@
-import {Dimensions, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React, {useEffect} from 'react';
 import {Formik} from 'formik';
 import Input from '../../components/Input/Input';
@@ -27,11 +34,11 @@ const SignInScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <View style={styles.logo_container}>
+      <View style={styles.logo_container}>
         <Image
           style={styles.logo}
-          source={require('../../asstes/elearning.png')}></Image>
-      </View> */}
+          source={require('../../asstes/Marmara_Üniversitesi_logo.png')}></Image>
+      </View>
       <Formik
         initialValues={{
           userName: '',
@@ -68,20 +75,21 @@ export default SignInScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#64b5f6',
+    backgroundColor: 'black',
     justifyContent: 'center',
   },
   logo: {
-    height: Dimensions.get('window').height / 3,
+    height: Dimensions.get('window').height / 4,
     resizeMode: 'contain',
-    tintColor: 'white',
   },
   logo_container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginBottom: 50,
   },
   body_container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
 });

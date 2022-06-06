@@ -4,7 +4,7 @@ import React from 'react';
 const Error = () => {
   return (
     <View>
-      <Text>Error</Text>
+      <Text style={{}}>Error</Text>
     </View>
   );
 };

@@ -30,7 +30,13 @@ const HomeHeader = ({title, navigation}) => {
           justifyContent: 'center',
           marginRight: 15,
         }}>
-        <MCIcon name={'cart'} color={'#fff'} size={32}></MCIcon>
+        <MCIcon
+          name={'cart'}
+          color={'#fff'}
+          onPress={() => {
+            navigation.navigate('ShoppingCartScreen');
+          }}
+          size={32}></MCIcon>
       </View>
     </View>
   );
